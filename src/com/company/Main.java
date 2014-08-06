@@ -39,8 +39,27 @@ public class Main {
         biggerGraph.addEdge(0,3);
         biggerGraph.addEdge(1,7);
         biggerGraph.addEdge(1,5);
-System.out.println("**Testing larger minimum spanning tree**");
+        System.out.println("**Testing larger minimum spanning tree**");
         System.out.println(biggerGraph.breadthSpanningTree('C'));
+
+        System.out.println("**Testing Depth First minimum spanning tree**");
+        Graph dGraph = new Graph();
+        dGraph.addVertex('A');
+        dGraph.addVertex('B');
+        dGraph.addVertex('C');
+        dGraph.addVertex('D');
+        dGraph.addVertex('E');
+
+        dGraph.addEdge(0,1);
+        dGraph.addEdge(1,2);
+        dGraph.addEdge(0,3);
+        dGraph.addEdge(3,4);
+        System.out.println("Starting at 'A': "+dGraph.depthSpanningTree('A'));
+        System.out.println("Starting at 'B': "+dGraph.depthSpanningTree('B'));
+        System.out.println("Starting at 'C': "+dGraph.depthSpanningTree('C'));
+        System.out.println("Starting at 'D': "+dGraph.depthSpanningTree('D'));
+        System.out.println("Starting at 'E': "+dGraph.depthSpanningTree('E'));
+
 
     }
 }

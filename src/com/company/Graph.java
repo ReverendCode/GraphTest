@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.*;
+
 /**
  * Created by Code on 8/5/14.
  */
@@ -9,6 +11,7 @@ public class Graph {// matrix is indexed to list
     private Vertex[] vertexList; //list of vertexes
     private int[][] connMatrix; //Connection matrix
     private Queue theQueue;
+    private Stack theStack;
 
     public Graph () {
         vertexList = new Vertex[MAX_VERTEX];
@@ -20,6 +23,7 @@ public class Graph {// matrix is indexed to list
             }
         }
         theQueue = new Queue();
+        theStack = new Stack();
     }
     public void addVertex(char label) {
         vertexList[nVertices++] = new Vertex(label);
@@ -55,16 +59,34 @@ public class Graph {// matrix is indexed to list
         for (int i = 0; i < nVertices;i++) {//reset touch flags
             vertexList[i].touched=false;
         }
-//this will return a strange looking output unless it is formatted somehow.
-
         return output;
     }
 
     public String depthSpanningTree (char label) {
         String output = "";
+        int startLoc = 0;
+        int neighbor;
+        for (int i = 0;i < nVertices;i++) {
+            if (vertexList[i].datum==label) {
+                startLoc=i;
+            }
+        }
+        vertexList[startLoc].touched=true;
+        theStack.push(startLoc);
+        output+=vertexList[startLoc].datum;
 
-
-
+        while (!theStack.isEmpty()) {
+            int temp = getNeighbor(theStack.peek());
+            if (temp==-1) theStack.pop();
+            else {
+                vertexList[temp].touched=true;
+                output+=vertexList[temp].datum;
+                theStack.push(temp);
+            }
+        }
+        for (int i=0;i<nVertices;i++) {
+            vertexList[i].touched=false;
+        }
         return output;
     }
     private int getNeighbor(int current) {
