@@ -6,9 +6,11 @@ package com.company;
 public class Vertex {
     public char datum;
     public boolean touched;
+    public boolean path;
 
     public Vertex(char letter) {
         datum=letter;
-        touched=false;
+        path=touched=false;
+
     }
 }

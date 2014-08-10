@@ -42,7 +42,7 @@ public class Main {
         System.out.println("**Testing larger minimum spanning tree**");
         System.out.println(biggerGraph.breadthSpanningTree('C'));
 
-        System.out.println("**Testing Depth First minimum spanning tree**");
+        System.out.println("**Testing Depth First directed minimum spanning tree**");
         Graph dGraph = new Graph();
         dGraph.addVertex('A');
         dGraph.addVertex('B');
@@ -50,15 +50,44 @@ public class Main {
         dGraph.addVertex('D');
         dGraph.addVertex('E');
 
-        dGraph.addEdge(0,1);
-        dGraph.addEdge(1,2);
-        dGraph.addEdge(0,3);
-        dGraph.addEdge(3,4);
+        dGraph.addDirectedEdge(0,1);
+        dGraph.addDirectedEdge(1,2);
+        dGraph.addDirectedEdge(0,3);
+        dGraph.addDirectedEdge(3,4);
         System.out.println("Starting at 'A': "+dGraph.depthSpanningTree('A'));
         System.out.println("Starting at 'B': "+dGraph.depthSpanningTree('B'));
         System.out.println("Starting at 'C': "+dGraph.depthSpanningTree('C'));
         System.out.println("Starting at 'D': "+dGraph.depthSpanningTree('D'));
         System.out.println("Starting at 'E': "+dGraph.depthSpanningTree('E'));
+
+        System.out.println("**Testing Weighted, directed spanning tree**");
+        Graph span = new Graph();
+        span.addVertex('A');//0
+        span.addVertex('B');//1
+        span.addVertex('C');//2
+        span.addVertex('D');//3
+        span.addVertex('E');//4
+
+        span.addDirectedWeightedEdge(0,1,50);
+        span.addDirectedWeightedEdge(0,3,80);
+        span.addDirectedWeightedEdge(1,2,60);
+        span.addDirectedWeightedEdge(1,3,90);
+        span.addDirectedWeightedEdge(2,4,40);
+        span.addDirectedWeightedEdge(3,2,20);
+        span.addDirectedWeightedEdge(3,4,70);
+        span.addDirectedWeightedEdge(4,1,50);
+
+        String output = "";
+        int[][] conGraph = span.weightedSpanningTree();
+        System.out.println("A    B    C    D    E");
+        for (int i = 0;i<5;i++) {
+            for (int j = 0;j<5;j++) {
+              output += conGraph[i][j] + "  ";
+            }
+            output += "\n";
+        }
+        System.out.println(output);
+
 
 
     }
